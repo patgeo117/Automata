@@ -6,7 +6,7 @@ Este proyecto utiliza **GitHub Actions** para automatizar la tarea de realizar u
 - Realiza commits diarios sin intervención manual.
 - Funciona directamente desde GitHub Actions, por lo que no depende de un servidor o computadora personal.
 - El commit incluye la fecha y hora exacta del cambio.
-- Configurado para ejecutarse diariamente a las **4:15 PM (hora local de Colombia)**, equivalente a **21:15 UTC**.
+- Configurado para ejecutarse diariamente a las **12:00 PM (hora local de Colombia)**, equivalente a **12:00 UTC**.
 
 ---
 
@@ -18,7 +18,7 @@ name: Commit Diario
 
 on:
   schedule:
-    - cron: '15 21 * * *' # Ejecutar a las 21:15 UTC cada día
+    - cron: '00 12 * * *' # Ejecutar a las 12:00 UTC cada día
 
 jobs:
   commit-job:
@@ -57,11 +57,11 @@ jobs:
 ## Configuración del cron
 El cron está configurado para ejecutarse diariamente a las **21:15 UTC**. Si deseas cambiar la hora:
 - Usa el formato CRON: `minuto hora * * *`.
-- Asegúrate de convertir tu hora local a UTC. Por ejemplo, las 4:15 PM en Colombia (UTC-5) corresponden a las 21:15 UTC.
+- Asegúrate de convertir tu hora local a UTC. Por ejemplo, las 12:00 PM en Colombia (UTC-5) corresponden a las 12:00 UTC.
 
 Ejemplo:
 ```yaml
-cron: '15 16 * * *' # Para ejecutar a las 4:15 PM UTC
+cron: '00 12 * * *' # Para ejecutar a las 12:00 PM UTC
 ```
 
 ---
