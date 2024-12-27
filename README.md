@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Clonar el repositorio
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }} # Usar token para autenticación
 
       - name: Modificar o añadir archivo
         run: |
@@ -66,6 +68,32 @@ cron: '00 12 * * *' # Para ejecutar a las 12:00 PM UTC
 
 ---
 
+## Configuración del Token de Acceso Personal (PAT)
+Para permitir que el bot haga commits automáticamente, es necesario crear y usar un **Token de Acceso Personal (PAT)** con permisos adecuados.
+
+### Pasos para crear el Token:
+1. **Generar un PAT**:
+   - Ve a [GitHub Token Settings](https://github.com/settings/tokens).
+   - Haz clic en **Generate new token**.
+   - Selecciona los permisos necesarios:
+     - **repo**: Para tener acceso de lectura y escritura a los repositorios.
+   - Copia el token generado (lo necesitarás en el siguiente paso).
+
+2. **Agregar el Token como Secreto en GitHub**:
+   - En tu repositorio de GitHub, ve a **Settings** → **Secrets** → **New repository secret**.
+   - Crea un secreto llamado `GH_TOKEN` y pega el token que copiaste en el paso anterior.
+
+3. **Actualizar el workflow para usar el Token**:
+   En el archivo `commit-daily.yml`, asegúrate de incluir el token en la sección de **checkout**:
+   ```yaml
+   - name: Clonar el repositorio
+     uses: actions/checkout@v3
+     with:
+       token: ${{ secrets.GH_TOKEN }} # Usar token para autenticación
+   ```
+
+---
+
 ## Personalización
 - **Nombre del bot**: Cambiado a `Daily Commit Bot` para identificarlo en los logs.
 - **Correo del bot**: Configurado como `tu-id+username@users.noreply.github.com` para mantener privacidad y autenticidad.
@@ -83,6 +111,3 @@ cron: '00 12 * * *' # Para ejecutar a las 12:00 PM UTC
 - Automatización total: No se necesita intervención manual.
 - Independencia: Funciona desde GitHub sin depender de infraestructura externa.
 - Simplicidad: Configuración mínima y mantenimiento prácticamente nulo.
-
----
-
