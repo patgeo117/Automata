@@ -2,7 +2,7 @@ name: Commit Diario
 
 on:
   schedule:
-    - cron: '15 16 * * *' # Ejecutar a las 12:00 UTC cada día "0 12 * * *"
+    - cron: "0 12 * * *" # Ejecutar a las 12:00 UTC cada día 
 
 jobs:
   commit-job:
