@@ -1,0 +1,28 @@
+name: Commit Diario
+
+on:
+  schedule:
+    - cron: '15 16 * * *' # Ejecutar a las 12:00 UTC cada día "0 12 * * *"
+
+jobs:
+  commit-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Modificar o añadir archivo
+        run: |
+          echo "Actualización del día: $(date)" >> archivo_diario.txt
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name "Automated Commit"
+          git config --global user.email "108493931+patgeo117@users.noreply.github.com"
+
+      - name: Hacer commit y push
+        run: |
+          git add .
+          git commit -m "Commit automático: $(date)"
+          git push
